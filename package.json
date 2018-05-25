@@ -1,6 +1,7 @@
 {
   "name": "boo-land-row",
   "description": "a row with more pager button",
+  "version": "0.0.1",
   "main": "boo-land-row.js",
   "dependencies": {
     "@polymer/polymer": "^3.0.0"
