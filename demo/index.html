@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>boo-land-row demo</title>
+
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+      import '@polymer/iron-icons/iron-icons';
+      import '@polymer/paper-fab/paper-fab';
+    </script>
+
+    <script type="module" src="../boo-land-row.js"></script>
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        [slot=content]>span {
+          background-color: grey;  
+          color: white;
+          display: inline-block;
+          padding: 5px 10px;
+          margin: 5px 10px;
+        }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic boo-land-row demo</h3>
+      <demo-snippet>
+        <template>
+          <boo-land-row>
+
+            <paper-fab 
+              slot="to-left"
+              icon="icons:arrow-back"></paper-fab>
+
+            <div slot="content">
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+              <span>hello world</span>
+            </div>
+
+            <paper-fab 
+              slot="to-right"
+              icon="icons:arrow-forward"></paper-fab>
+
+          </boo-land-row>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
