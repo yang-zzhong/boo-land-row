@@ -25,26 +25,21 @@ class BooLandRow extends PolymerElement {
           white-space: nowrap;
           transition: all .2s ease-in-out;
         }
-        paper-fab {
-          background-color: white;
-          color: var(--accent-color);
-          opacity: 1;
-          z-index: 1;
-        }
-        paper-fab:hover {
-          opacity: 0.5;
-        }
         #fabWrapperLeft {
           top: 0px;
           left: 0px;
           background: linear-gradient(to right,#ffffff,rgba(255,255,255,0));
           position: absolute;
+          z-index: 1;
+          @apply --boo-land-row-to-left;
         }
         #fabWrapperRight {
           top: 4px;
           right: 0px;
           background: linear-gradient(to left,#ffffff,rgba(255,255,255,0));
           position: absolute;
+          z-index: 1;
+          @apply --boo-land-row-to-right;
         }
       </style>
       <div id="fabWrapperLeft" on-click="_toLeft">
