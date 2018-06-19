@@ -83,8 +83,12 @@ class BooLandRow extends PolymerElement {
   }
 
   _pageChanged(page) {
-    let rect = this.getBoundingClientRect();
-    if (rect.width == 0) {
+    let rectWidth = this.getBoundingClientRect().width;
+    if (this.buttonStatic) {
+      rectWidth -= this.$.fabWrapperLeft.getBoundingClientRect().width;
+      rectWidth -= this.$.fabWrapperRight.getBoundingClientRect().width;
+    }
+    if (rectWidth == 0) {
       return;
     }
     let items = this.childNodes;
@@ -98,9 +102,8 @@ class BooLandRow extends PolymerElement {
       let aRect = items[i].getBoundingClientRect();
       width += aRect.width + 5;
     }
-    console.log(width);
     this.$.container.style.overflow = 'hidden';
-    let lastPage = Math.ceil(width / rect.width);
+    let lastPage = Math.ceil(width / rectWidth);
     let aPage = -1 * page + 1;
     if (aPage > lastPage) {
       this.page = -1 * lastPage - 1;
@@ -116,8 +119,8 @@ class BooLandRow extends PolymerElement {
     } else {
       this.$.goRight.style.display = "block";
     }
-    let w = Math.max(width - rect.width, 0);
-    this.$.wrapper.style.marginLeft = Math.max(-1 * w, ((page - 1) * rect.width)) + 'px';
+    let w = Math.max(width - rectWidth, 0);
+    this.$.wrapper.style.marginLeft = Math.max(-1 * w, ((page - 1) * rectWidth)) + 'px';
   }
 
   _toRight() {
