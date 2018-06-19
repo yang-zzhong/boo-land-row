@@ -15,9 +15,9 @@ class BooLandRow extends PolymerElement {
       <style>
         :host {
           display: block;
+          overflow: hidden;
           position: relative;
           min-height: 61px;
-          overflow: hidden;
           @apply --layout-horizontal;
           @apply --layout-center;
         }
@@ -41,12 +41,19 @@ class BooLandRow extends PolymerElement {
           z-index: 1;
           @apply --boo-land-row-to-right;
         }
+        :host([button-static]) #fabWrapperLeft,
+        :host([button-static]) #fabWrapperRight {
+          top: 0px;
+          position: relative;
+        }
       </style>
       <div id="fabWrapperLeft" on-click="_toLeft">
         <div id="goLeft"><slot name="to-left"></slot></div>
       </div>
-      <div id="wrapper">
-        <slot name="content"></slot>
+      <div id="container">
+        <div id="wrapper">
+          <slot name="content"></slot>
+        </div>
       </div>
       <div id="fabWrapperRight" on-click="_toRight">
         <div id="goRight"><slot name="to-right"></slot></div>
@@ -64,6 +71,10 @@ class BooLandRow extends PolymerElement {
       lastPage: {
         type: Number,
       },
+      buttonStatic: {
+        type: Boolean,
+        reflectToAttribute: true
+      }
     };
   }
 
@@ -79,6 +90,7 @@ class BooLandRow extends PolymerElement {
     let items = this.childNodes;
     let unitWidth = 0;
     let width = 0;
+    this.$.container.style.overflow = 'visible';
     for (let i in items) {
       if (!items[i].getBoundingClientRect) {
         continue;
@@ -86,6 +98,8 @@ class BooLandRow extends PolymerElement {
       let aRect = items[i].getBoundingClientRect();
       width += aRect.width + 5;
     }
+    console.log(width);
+    this.$.container.style.overflow = 'hidden';
     let lastPage = Math.ceil(width / rect.width);
     let aPage = -1 * page + 1;
     if (aPage > lastPage) {
