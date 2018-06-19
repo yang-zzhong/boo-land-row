@@ -83,9 +83,11 @@ class BooLandRow extends PolymerElement {
   }
 
   _pageChanged(page) {
-    let rectWidth = this.getBoundingClientRect().width;
-    rectWidth -= this.$.fabWrapperLeft.getBoundingClientRect().width;
-    rectWidth -= this.$.fabWrapperRight.getBoundingClientRect().width;
+    let rectWidth = this.getBoundingClientRect().width - 8;
+    this.$.goLeft.style.display = 'block';
+    this.$.goRight.style.display = 'block';
+    rectWidth -= this.$.goLeft.getBoundingClientRect().width;
+    rectWidth -= this.$.goRight.getBoundingClientRect().width;
     if (rectWidth == 0) {
       return;
     }
