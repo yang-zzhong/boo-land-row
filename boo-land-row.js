@@ -84,10 +84,8 @@ class BooLandRow extends PolymerElement {
 
   _pageChanged(page) {
     let rectWidth = this.getBoundingClientRect().width;
-    if (this.buttonStatic) {
-      rectWidth -= this.$.fabWrapperLeft.getBoundingClientRect().width;
-      rectWidth -= this.$.fabWrapperRight.getBoundingClientRect().width;
-    }
+    rectWidth -= this.$.fabWrapperLeft.getBoundingClientRect().width;
+    rectWidth -= this.$.fabWrapperRight.getBoundingClientRect().width;
     if (rectWidth == 0) {
       return;
     }
