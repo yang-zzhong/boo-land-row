@@ -79,7 +79,11 @@ class BooLandRow extends PolymerElement {
   }
 
   update() {
-    this.page = 1;
+    if (this.page == 1) {
+      this._pageChanged(1);
+    } else {
+      this.page = 1;
+    }
   }
 
   _pageChanged(page) {
