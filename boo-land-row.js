@@ -1,4 +1,5 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
 
 /**
  * `boo-land-row`
@@ -17,7 +18,7 @@ class BooLandRow extends PolymerElement {
           display: block;
           overflow: hidden;
           position: relative;
-          min-height: 61px;
+          height: var(--boo-lan-row-height, 64px);
           @apply --layout-horizontal;
           @apply --layout-center;
         }
