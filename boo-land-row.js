@@ -67,14 +67,17 @@ class BooLandRow extends PolymerElement {
       page: {
         type: Number,
         value: 1,
+        reflectToAttribute: true,
         observer: "_pageChanged"
       },
       lastPage: {
         type: Number,
+        reflectToAttribute: true,
+        notify: true
       },
-      buttonStatic: {
-        type: Boolean,
-        reflectToAttribute: true
+      gap: {
+        type: Number,
+        value: 5,
       }
     };
   }
@@ -91,10 +94,8 @@ class BooLandRow extends PolymerElement {
     let rectWidth = this.getBoundingClientRect().width;
     this.$.goLeft.style.display = 'block';
     this.$.goRight.style.display = 'block';
-    rectWidth -= Math.max(
-      this.$.goLeft.getBoundingClientRect().width,
-      this.$.goRight.getBoundingClientRect().width
-    )
+    rectWidth -= this.$.goLeft.getBoundingClientRect().width +
+      this.$.goRight.getBoundingClientRect().width;
     if (rectWidth == 0) {
       return;
     }
@@ -107,13 +108,13 @@ class BooLandRow extends PolymerElement {
         continue;
       }
       let aRect = items[i].getBoundingClientRect();
-      width += aRect.width + 5;
+      width += aRect.width + this.gap;
     }
     this.$.container.style.overflow = 'hidden';
-    let lastPage = Math.ceil(width / rectWidth);
-    let aPage = -1 * page + 1;
-    if (aPage > lastPage) {
-      this.page = -1 * lastPage - 1;
+    this.lastPage = Math.ceil(width / rectWidth);
+    let aPage = page;
+    if (aPage > this.lastPage) {
+      // this.page = -1 * lastPage - 1;
       return;
     }
     if (page == 1) {
@@ -121,20 +122,20 @@ class BooLandRow extends PolymerElement {
     } else {
       this.$.goLeft.style.display = "block";
     }
-    if (aPage == lastPage - 1) {
+    if (aPage == this.lastPage) {
       this.$.goRight.style.display = "none";
     } else {
       this.$.goRight.style.display = "block";
     }
     let w = Math.max(width - rectWidth, 0);
-    this.$.wrapper.style.marginLeft = Math.max(-1 * w, ((page - 1) * rectWidth)) + 'px';
+    this.$.wrapper.style.marginLeft = -1 * Math.max(-1 * w, ((page - 1) * rectWidth)) + 'px';
   }
 
   _toRight() {
-    this.page--;
+    this.page++;
   }
   _toLeft() {
-    this.page++;
+    this.page--;
   }
 }
 
