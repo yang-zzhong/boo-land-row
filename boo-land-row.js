@@ -98,6 +98,10 @@ class BooLandRow extends PolymerElement {
   }
 
   _pageChanged(page) {
+    if (page < 1) {
+      this.page = 1
+      return;
+    }
     let rectWidth = this.getBoundingClientRect().width;
     this.$.goLeft.style.display = 'block';
     this.$.goRight.style.display = 'block';
@@ -111,6 +115,7 @@ class BooLandRow extends PolymerElement {
     this.$.container.style.overflow = 'hidden';
     this.lastPage = Math.ceil(width / rectWidth);
     if (page > this.lastPage) {
+      this.page = this.lastPage;
       return;
     }
     if (page == 1) {
