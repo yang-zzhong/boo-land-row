@@ -16,7 +16,6 @@ class BooLandRow extends PolymerElement {
       <style>
         :host {
           display: block;
-          overflow: hidden;
           position: relative;
           height: var(--boo-lan-row-height, 64px);
           @apply --layout-horizontal;
@@ -75,11 +74,23 @@ class BooLandRow extends PolymerElement {
         reflectToAttribute: true,
         notify: true
       },
+      x0: {
+        type: Number,
+        value: 0
+      },
       gap: {
         type: Number,
         value: 5,
       }
     };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.$.wrapper.addEventListener('mousedown', this.lock.bind(this), false);
+    this.$.wrapper.addEventListener('touchstart', this.lock.bind(this), false);
+    this.$.wrapper.addEventListener('mouseup', this.move.bind(this), false);
+    this.$.wrapper.addEventListener('touchend', this.move.bind(this), false);
   }
 
   update() {
@@ -137,6 +148,23 @@ class BooLandRow extends PolymerElement {
   _toLeft() {
     this.page--;
   }
+
+  move(e) {
+    let dx = this.unify(e).clientX - this.x0;
+    if (dx > 0) {
+      this._toLeft();
+    } else {
+      this._toRight();
+    }
+  };
+
+  lock(e) {
+    this.x0 = this.unify(e).clientX;
+  };
+
+  unify(e) {
+    return e.changedTouches ? e.changedTouches[0] : e;
+  };
 }
 
 window.customElements.define('boo-land-row', BooLandRow);
