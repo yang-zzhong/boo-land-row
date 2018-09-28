@@ -78,10 +78,6 @@ class BooLandRow extends PolymerElement {
         type: Number,
         value: 0
       },
-      gap: {
-        type: Number,
-        value: 5,
-      }
     };
   }
 
@@ -105,27 +101,16 @@ class BooLandRow extends PolymerElement {
     let rectWidth = this.getBoundingClientRect().width;
     this.$.goLeft.style.display = 'block';
     this.$.goRight.style.display = 'block';
-    rectWidth -= this.$.goLeft.getBoundingClientRect().width +
-      this.$.goRight.getBoundingClientRect().width;
+    rectWidth -= this.$.goLeft.getBoundingClientRect().width + this.$.goRight.getBoundingClientRect().width;
     if (rectWidth == 0) {
       return;
     }
     let items = this.childNodes;
-    let unitWidth = 0;
-    let width = 0;
     this.$.container.style.overflow = 'visible';
-    for (let i in items) {
-      if (!items[i].getBoundingClientRect) {
-        continue;
-      }
-      let aRect = items[i].getBoundingClientRect();
-      width += aRect.width + this.gap;
-    }
+    let width = this.$.wrapper.getBoundingClientRect().width;
     this.$.container.style.overflow = 'hidden';
     this.lastPage = Math.ceil(width / rectWidth);
-    let aPage = page;
-    if (aPage > this.lastPage) {
-      // this.page = -1 * lastPage - 1;
+    if (page > this.lastPage) {
       return;
     }
     if (page == 1) {
@@ -133,7 +118,7 @@ class BooLandRow extends PolymerElement {
     } else {
       this.$.goLeft.style.display = "block";
     }
-    if (aPage == this.lastPage) {
+    if (page == this.lastPage) {
       this.$.goRight.style.display = "none";
     } else {
       this.$.goRight.style.display = "block";
@@ -151,6 +136,9 @@ class BooLandRow extends PolymerElement {
 
   move(e) {
     let dx = this.unify(e).clientX - this.x0;
+    if (Math.abs(dx) < 5) {
+      return;
+    }
     if (dx > 0) {
       this._toLeft();
     } else {
