@@ -1,7 +1,7 @@
 {
   "name": "boo-land-row",
   "description": "a row with more pager button",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "main": "boo-land-row.js",
   "dependencies": {
     "@polymer/iron-flex-layout": "^3.0.1"

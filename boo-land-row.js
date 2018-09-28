@@ -115,7 +115,7 @@ class BooLandRow extends PolymerElement {
     this.$.container.style.overflow = 'hidden';
     this.lastPage = Math.ceil(width / rectWidth);
     if (page > this.lastPage) {
-      this.page = this.lastPage;
+      this.page = Math.max(this.lastPage, 1);
       return;
     }
     if (page == 1) {
